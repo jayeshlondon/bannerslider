@@ -1,0 +1,59 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<style type="text/css">
+		.clear { clear: both; }
+		.page { margin: auto; padding-top: 40px; width: 900px; }
+		.bannerContainer { position: relative; width: 592px; height: 324px; overflow: hidden; border:3px solid black;}
+		.banner { position: absolute; }
+		.banner img { float: left; }
+	</style>
+</head>
+<body>
+	<div class="page">
+		<div id="bannerContainer" class="bannerContainer">
+			<div class="banner">
+				<img src="images/1.jpg" />
+				<img src="images/2.jpg" />
+				<img src="images/3.jpg" />
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		var divBanner = $(".banner");
+
+		// calculating image width and number of images
+		var imageWidth = divBanner.first("img").width();
+		var imageCount = $(".banner img").length;
+		var bannerCalculatedWidth = imageCount * imageWidth;
+		divBanner.css("left", "0px");
+
+		// setting benner width 
+		divBanner.width(bannerCalculatedWidth);
+
+		window.setInterval(moveImage, 3000);
+
+		function moveImage()
+		{
+			var bannerLeft = divBanner.css("left").replace("px", "");
+
+			//alert(bannerLeft);
+			var temp = (0-(bannerCalculatedWidth-imageWidth));
+
+			if(temp == bannerLeft)
+				divBanner.css("left", "0px");	
+			else{
+				bannerLeft -= imageWidth;
+				divBanner.css("left", bannerLeft + "px");
+			}
+		}
+
+	});
+
+	</script>
+</body>
+</html>
